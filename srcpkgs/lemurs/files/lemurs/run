@@ -1,0 +1,7 @@
+#!/bin/sh
+exec 2>&1
+[ -r conf ] && . ./conf
+TTY=${TTY:-7}
+BAUD_RATE=${BAUD_RATE:-38400}
+TERM_NAME=${TERM_NAME:-linux}
+exec setsid agetty -in -l /usr/bin/lemurs -o "--tty ${TTY}" tty${TTY} ${BAUD_RATE} ${TERM_NAME}

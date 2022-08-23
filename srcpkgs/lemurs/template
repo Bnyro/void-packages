@@ -1,0 +1,23 @@
+# Template file for 'lemurs'
+pkgname=lemurs
+version=0.3.2
+revision=1
+build_style=cargo
+conf_files="/etc/lemurs/config.toml /etc/pam.d/lemurs /etc/lemurs/wayland/*"
+# make_dirs="/etc/lemurs/wms 755 root root"
+makedepends="pam-devel"
+short_desc="Customizable TUI display/login manager written in Rust"
+maintainer="Marcin Puc <tranzystorek.io@protonmail.com>"
+license="Apache-2.0, MIT"
+homepage="https://github.com/coastalwhite/lemurs/"
+distfiles="https://github.com/coastalwhite/lemurs/archive/refs/tags/v${version}.tar.gz"
+checksum=a366595602c75ed723e7b527ce1b8be33bdb998f5faa824605b97fb4b9e810f4
+
+post_install() {
+	vlicense LICENSE-MIT
+	vinstall extra/config.toml 644 etc/lemurs
+	vinstall extra/lemurs.pam 644 etc/pam.d lemurs
+	vinstall extra/xsetup.sh 755 etc/lemurs
+	vinstall ${FILESDIR}/labwc 755 etc/lemurs/wayland
+	vsv lemurs
+}
