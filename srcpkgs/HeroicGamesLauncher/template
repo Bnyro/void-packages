@@ -1,0 +1,30 @@
+# Template file for 'HeroicGamesLauncher'
+pkgname=HeroicGamesLauncher
+version=2.14.1
+revision=1
+hostmakedepends="nodejs python3 yarn"
+checkdepends="tar xz"
+short_desc="Open source launcher for GOG and Epic Games"
+maintainer="sirkhancision <jsantiago12tone@gmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher"
+distfiles="https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/archive/v${version}.tar.gz"
+checksum=dc8d240a843af41a3d4d5d7ed5ca45f482f5a7fb7e7656016a91c6e133c35b22
+nopie_files="/opt/heroic/resources/app.asar.unpacked/build/bin/linux/gogdl
+	/opt/heroic/resources/app.asar.unpacked/build/bin/linux/legendary
+	/opt/heroic/resources/app.asar.unpacked/build/bin/linux/nile"
+
+do_build() {
+	yarn
+	yarn dist:linux tar.xz
+}
+
+do_install() {
+	vmkdir opt/heroic
+	vmkdir usr/bin
+	vcopy dist/linux-unpacked/* opt/heroic
+	ln -sf /opt/heroic/heroic "${DESTDIR}/usr/bin/heroic"
+
+	vinstall public/icon.png 644 usr/share/pixmaps heroic.png
+	vinstall "${FILESDIR}/heroic.desktop" 644 usr/share/applications
+}
