@@ -1,0 +1,19 @@
+# Template file for 'monophony'
+pkgname=monophony
+version=4.2.1
+revision=1
+build_style=gnu-makefile
+hostmakedepends="python3-setuptools python3-pip glib-devel gettext"
+depends="libadwaita python3-gobject python3-ytmusicapi python3-mprisify python3-strenum python3-logboth yt-dlp"
+short_desc="Gtk app for streaming music from YouTube"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="0BSD"
+homepage="https://gitlab.com/zehkira/monophony/"
+distfiles="https://gitlab.com/zehkira/monophony/-/archive/v${version}/monophony-v${version}.tar.gz"
+checksum=e3baa3a83f09a9d4c8ad11483e0b222e72cbcc4f4c77be358e8e0029c0fc7ad5
+build_wrksrc="source"
+
+do_install() {
+	make prefix="${DESTDIR}/usr" install
+	vlicense ../LICENSE
+}
