@@ -1,0 +1,23 @@
+# Template file for 'monophony'
+pkgname=monophony
+version=3.3.2
+revision=1
+build_style=python3-pep517
+hostmakedepends="python3-pip python3-setuptools python3-wheel python3-meson-python pkg-config gobject-introspection"
+makedepends="python3-devel python3-cairo-devel"
+depends="libadwaita python3-gobject python3-ytmusicapi python3-mpris_server yt-dlp"
+short_desc="Gtk app for streaming music from YouTube"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="GPL-2.0-or-later"
+homepage="https://gitlab.com/zehkira/monophony/"
+distfiles="https://gitlab.com/zehkira/monophony/-/archive/v${version}/monophony-v${version}.tar.gz"
+checksum=9b47fb34a8c079e664adced717fd3af89e3b947399f47a9662f6883b3e8f5075
+build_wrksrc="source"
+
+post_install() {
+	vbin bin/monophony.py monophony
+	vinstall data/monophony.desktop 644 /usr/share/applications
+	for icontype in scalable symbolic; do
+		vinstall data/icons/${icontype}.svg 644 /usr/share/icons/hicolor/${icontype}/apps/ monophony.svg
+	done
+}
