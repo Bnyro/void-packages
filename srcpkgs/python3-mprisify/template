@@ -1,0 +1,19 @@
+# Template file for 'python3-mprisify'
+pkgname=python3-mprisify
+version=1.0.0
+revision=1
+build_style=python3-pep517
+makedepends="python3-setuptools"
+depends="python3-pydbus python3-gobject"
+short_desc="Adapters to integrate MPRIS support in media player device"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="AGPL-3.0-only"
+homepage="https://gitlab.com/zehkira/mprisify"
+changelog="https://gitlab.com/zehkira/mprisify/-/raw/master/CHANGELOG.md"
+distfiles="https://gitlab.com/zehkira/mprisify/-/archive/v${version}/mprisify-v${version}.tar.gz"
+checksum=a3abe8486c22c0e39002f2d46a86812176f8c503bba580580fc1bed24fa56169
+make_check=no # upstream doesn't provide tests, do_check of the python3-module hence fails
+
+post_install() {
+	vlicense LICENSE
+}
