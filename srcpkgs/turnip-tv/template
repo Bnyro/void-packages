@@ -1,0 +1,25 @@
+# Template file for 'turnip-tv'
+pkgname=turnip-tv
+version=0.1.0
+revision=1
+conf_files="/etc/turnip-tv/channels.txt /etc/turnip-tv/turnip-tv.conf"
+depends="mpv"
+short_desc="TUI IPTV client"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="GPL-2.0-only"
+homepage="https://gitlab.com/christosangel/turnip-tv"
+distfiles="https://gitlab.com/christosangel/turnip-tv/-/archive/0.1.0/turnip-tv-${version}.tar.gz"
+checksum=b1d6e3570520cad8178e4db408434ccbbd436d456bfc5d4ece809b49899080d1
+
+post_patch() {
+	vsed -i 's/\$HOME\/\.config/\/etc/g' turnip-tv.sh
+}
+
+do_install() {
+	vbin turnip-tv.sh turnip-tv
+	
+	vmkdir etc/turnip-tv/png
+	vcopy png/* etc/turnip-tv/png
+	vcopy channels.txt etc/turnip-tv
+	vcopy turnip-tv.conf etc/turnip-tv
+}
