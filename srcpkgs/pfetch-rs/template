@@ -1,0 +1,17 @@
+# Template file for 'pfetch-rs'
+pkgname=pfetch-rs
+version=2.10.0
+revision=1
+build_style=cargo
+short_desc="Rewrite of the pfetch system information tool in Rust"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="MIT"
+homepage="https://github.com/Gobidev/pfetch-rs"
+#changelog=""
+distfiles="https://github.com/Gobidev/pfetch-rs/archive/refs/tags/v${version}.tar.gz"
+checksum=629091dc878916a34a62216540c52562a6b3e0b62fc23504e4b9fe25a5038fa3
+
+post_install() {
+	mv ${DESTDIR}/usr/bin/pfetch{,-rs}
+	vlicense LICENSE
+}
