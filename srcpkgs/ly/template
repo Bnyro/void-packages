@@ -1,0 +1,32 @@
+# Template file for 'ly'
+pkgname=ly
+version=1.0.2
+revision=1
+build_style=zig-build
+makedepends="libxcb-devel pam-devel"
+short_desc="Display manager with console UI"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="WTFPL"
+homepage="https://github.com/fairyglade/ly"
+changelog="https://github.com/fairyglade/ly/releases"
+distfiles="https://github.com/fairyglade/ly/archive/e125d8f1aa1544a6a106047c0acd7a7d2e0ff16c.tar.gz"
+checksum=5c33daa89b680ebce6dd37a0edfaa9f68066c4646708bcf020233c6a58d53561
+nopie=yes
+
+post_install() {
+	vsed -i 's@\$CONFIG_DIRECTORY@/etc@g' res/ly-runit-service/* res/config.ini res/setup.sh
+	vsed -i 's@\$PREFIX_DIRECTORY@/usr@g' res/ly-runit-service/* res/config.ini res/setup.sh
+	vsed -i 's@\$DEFAULT_TTY@7@g' res/ly-runit-service/* res/config.ini res/setup.sh
+	vsed -i 's@\$EXECUTABLE_NAME@ly@g' res/ly-runit-service/* res/config.ini res/setup.sh
+	vsed -i 's@tty = 2@tty = 7@' res/config.ini
+
+	vmkdir etc/sv
+	vmkdir etc/ly
+	vinstall res/ly-runit-service/run 755 etc/sv/ly
+	vinstall res/ly-runit-service/conf 755 etc/sv/ly
+	vinstall res/ly-runit-service/finish 755 etc/sv/ly
+	# vinstall res/xsetup.sh 755 etc/ly/
+	# vinstall res/wsetup.sh 755 etc/ly/
+	vinstall res/setup.sh 755 etc/ly/
+	vinstall res/config.ini 644 etc/ly/
+}
