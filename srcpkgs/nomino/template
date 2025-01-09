@@ -1,0 +1,15 @@
+# Template file for 'nomino'
+pkgname=nomino
+version=1.4.0
+revision=1
+build_style=cargo
+short_desc="Batch rename utility for developers"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="MIT OR Apache-2.0"
+homepage="https://github.com/yaa110/nomino"
+distfiles="https://github.com/yaa110/nomino/archive/refs/tags/v${version}.tar.gz"
+checksum=4b0e1debd76995b60ad020db97431ffcc01a64d4fc0040702ef0dea7ea368536
+
+post_install() {
+	vlicense LICENSE-MIT
+}
