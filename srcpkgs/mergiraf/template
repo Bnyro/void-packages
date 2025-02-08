@@ -1,0 +1,15 @@
+# Template file for 'mergiraf'
+pkgname=mergiraf
+version=0.5.1
+revision=1
+build_style=cargo
+short_desc="Syntax-aware git merge driver"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="GPL-3.0-or-later"
+homepage="https://mergiraf.org"
+distfiles="https://codeberg.org/mergiraf/mergiraf/archive/v${version}.tar.gz"
+checksum=90cff495a1c84bb074b0c0846fe22a32b1765e76de0046e3e444d5a209099086
+
+post_install() {
+	rm "${DESTDIR}/usr/bin/mgf_dev"
+}
