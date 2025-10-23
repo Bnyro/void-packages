@@ -1,0 +1,13 @@
+diff --git a/setup.py b/setup.py
+index 2ab514e..9d19dc6 100644
+--- a/setup.py
++++ b/setup.py
+@@ -32,7 +32,6 @@ setuptools.setup(
+         ],
+         "release": ["twine"],
+     },
+-    setup_requires=["pytest-runner"],
+     classifiers=[
+         "Development Status :: 5 - Production/Stable",
+         "Programming Language :: Python :: 3 :: Only",
+

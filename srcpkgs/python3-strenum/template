@@ -1,0 +1,12 @@
+# Template file for 'python3-strenum'
+pkgname=python3-strenum
+version=0.4.15
+revision=1
+build_style=python3-pep517
+makedepends="python3-setuptools"
+short_desc="Python Enum that inherits from str"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="MIT"
+homepage="https://github.com/irgeek/StrEnum/"
+distfiles="https://github.com/irgeek/StrEnum/archive/refs/tags/v${version}.tar.gz"
+checksum=ab442e918760a39a3b07e7923c128ff13a0bbebc6a173cda67237acb738d7e49
