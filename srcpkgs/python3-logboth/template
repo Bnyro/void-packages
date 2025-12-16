@@ -1,0 +1,17 @@
+# Template file for 'python3-logboth'
+pkgname=python3-logboth
+version=0.1.0
+revision=1
+build_style=python3-pep517
+makedepends="python3-setuptools"
+short_desc="Cross-platform Python library for logging to stdout and a file"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="BSD-0"
+homepage="https://gitlab.com/zehkira/logboth"
+changelog="https://gitlab.com/zehkira/logboth/-/raw/master/CHANGELOG.md"
+distfiles="https://gitlab.com/zehkira/logboth/-/archive/v${version}/mprisify-v${version}.tar.gz"
+checksum=27952abd412d25501f1b79a0cd1cfd22bee1a9933ff8f67990859ad75f8ef59d
+
+post_install() {
+	vlicense LICENSE
+}
