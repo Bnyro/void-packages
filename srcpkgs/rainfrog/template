@@ -1,0 +1,39 @@
+# Template file for 'rainfrog'
+pkgname=rainfrog
+version=0.3.19
+revision=1
+build_style=cargo
+hostmakedepends="pkg-config sqlite-devel libgit2-1.9-devel"
+makedepends="libgit2-1.9-devel sqlite-devel"
+short_desc="TUI for interacting with databases"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="MIT"
+homepage="https://github.com/achristmascarl/rainfrog"
+changelog="https://github.com/achristmascarl/rainfrog/releases"
+distfiles="https://github.com/achristmascarl/rainfrog/archive/refs/tags/v${version}.tar.gz"
+checksum=9b26d6f8515f7b382c07fecd241b13bdcb15d9945e7b858edcb109e202e641de
+
+_build_env() {
+	export CFLAGS_${RUST_TARGET//-/_}="${CFLAGS}" \
+		HOST_CFLAGS="-fstack-clash-protection ${CFLAGS_host}" \
+		CFLAGS_${RUST_BUILD//-/_}="${HOST_CFLAGS}" \
+	# unset CFLAGS to work around cc-rs adding CFLAGS to host and target CFLAGS_*.
+	# https://github.com/rust-lang/cc-rs/issues/1469
+	unset CFLAGS
+}
+
+pre_build() {
+	_build_env
+}
+
+pre_check() {
+	_build_env
+}
+
+pre_install() {
+	_build_env
+}
+
+post_install() {
+	vlicense LICENSE
+}
