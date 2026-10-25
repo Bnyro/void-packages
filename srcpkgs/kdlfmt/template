@@ -1,0 +1,23 @@
+# Template file for 'kdlfmt'
+pkgname=kdlfmt
+version=0.1.7
+revision=1
+build_style=cargo
+build_helper="qemu"
+make_install_args="--path cli"
+short_desc="Formatter for KDL documents"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="MIT"
+homepage="https://github.com/hougesen/kdlfmt"
+changelog="https://github.com/hougesen/kdlfmt/raw/refs/heads/main/CHANGELOG.md"
+distfiles="https://github.com/hougesen/kdlfmt/archive/refs/tags/v${version}.tar.gz"
+checksum=a3d3487d382af8b7372bec21a67e54f92f4674c31f9f781093d3c0ad3f08fc80
+
+post_install() {
+	for shell in bash fish zsh; do
+		vtargetrun "${DESTDIR}/usr/bin/kdlfmt" completions ${shell} > kdlfmt.${shell}
+		vcompletion kdlfmt.${shell} ${shell}
+	done
+
+	vlicense LICENSE
+}
