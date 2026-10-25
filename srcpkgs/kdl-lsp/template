@@ -1,0 +1,20 @@
+# Template file for 'kdl-lsp'
+pkgname=kdl-lsp
+version=6.6.1
+revision=1
+build_style=cargo
+make_build_args="--package kdl-lsp"
+make_install_args="--path tools/kdl-lsp"
+short_desc="LSP server for the KDL configuration language"
+maintainer="Bnyro <bnyro@tutanota.com>"
+license="Apache-2.0"
+homepage="https://github.com/kdl-org/kdl-rs"
+changelog="https://raw.githubusercontent.com/kdl-org/kdl-rs/refs/heads/main/CHANGELOG.md"
+distfiles="https://github.com/kdl-org/kdl-rs/archive/refs/tags/v${version}.tar.gz"
+checksum=3bb60d8304e1f910a8d9c436125e4512cef9c95f535dd8882be9932d7d12c253
+
+pre_build() {
+	# the "bytes" version pinned in Cargo.toml doesn't exist anymore
+	# remove this workaround on next update
+	cargo update --package bytes@1.10.1 --precise 1.10.1
+}
